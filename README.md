@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Marg Setu — SIH26002
 
 **AI-Based Smart Logistics and Accessibility Intelligence Platform for the North Eastern Region (NER)**
@@ -614,3 +615,7 @@ Operational Tracking
 ```
 
 **Marg Setu — Predict. Protect. Deliver.**
+=======
+# MargSetu
+Al-Based Smart Logistics and Accessibility Intelligence Platform for North Eastern Region (NER)
+>>>>>>> 4a3f586ac85344cb29073ebba9ce4aa3cdb50c3c
