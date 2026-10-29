@@ -1,621 +1,431 @@
-<<<<<<< HEAD
-# Marg Setu — SIH26002
+# Marg Setu — Disaster Response & Route Coordination Platform
 
-**AI-Based Smart Logistics and Accessibility Intelligence Platform for the North Eastern Region (NER)**
+**A web-based disaster management dashboard designed to support situational awareness, route monitoring, incident coordination, and emergency resource planning.**
 
-> **Observe → Predict → Decide → Reroute → Track → Learn**
+Marg Setu aims to help disaster-response teams understand developing situations, identify reported incidents, monitor response resources, and make better-informed decisions during emergencies, with an initial focus on the challenging terrain and connectivity conditions of Northeast India, particularly Sikkim and the Mangan region.
 
-Marg Setu is a logistics decision-support prototype for the North Eastern Region. It combines field incident intelligence, road-risk assessment, shipment impact analysis, GIS visualization, smart rerouting, alerts, vehicle monitoring, and operational analytics in one command center.
-
-The current prototype uses a React + TypeScript frontend and a Python/FastAPI backend. The frontend communicates with authenticated API endpoints and the backend is the source of truth for dashboard, incident, risk, alert, vehicle, shipment, and route-approval state.
+> **Project status:** Prototype / Active Development
 
 ---
 
-## 1. Problem Statement
+## Table of Contents
 
-The SIH26002 problem focuses on logistics and road accessibility in the North Eastern Region, where rainfall, landslides, flooding, road damage, bridge issues, limited connectivity, and fragmented operational information can disrupt movement.
-
-A logistics operator needs more than a shortest path:
-
-- Which roads are currently risky?
-- Which vehicles are affected?
-- Which shipments are affected?
-- Which cargo is critical?
-- Which alternative route is safer?
-- What decision should an operator make?
-
-Marg Setu addresses that chain as a single operational workflow.
-
----
-
-## 2. What Marg Setu Demonstrates
-
-### Core workflow
-
-```text
-Field Incident / Hazard
-        ↓
-FastAPI Incident Engine
-        ↓
-Risk Assessment
-        ↓
-Affected Shipment Identification
-        ↓
-Smart Route Recommendation
-        ↓
-Operator Approval
-        ↓
-Rerouted Shipment
-        ↓
-GIS + Alerts + Reports
-```
-
-### Current modules
-
-| Module | Purpose |
-|---|---|
-| Command Center | Operational overview |
-| Risk Intelligence | Live corridor risk + scenario simulator |
-| GIS Map | Incidents, vehicles, corridors and approved route geometry |
-| Field Incidents | Geo-tagged incident submission with offline queue |
-| Alerts | Risk and field-event intelligence |
-| Shipments | Impacted shipment monitoring |
-| Vehicles | Fleet monitoring |
-| Smart Rerouting | Risk-aware alternative route evaluation |
-| Reports & Analytics | Operational evidence and exported reporting |
-| SIH Demo Scenario | Controlled hazard-to-reroute demonstration |
+- [Overview](#overview)
+- [The Problem](#the-problem)
+- [Our Solution](#our-solution)
+- [Key Features](#key-features)
+- [How It Works](#how-it-works)
+- [Technology Stack](#technology-stack)
+- [System Architecture](#system-architecture)
+- [Getting Started](#getting-started)
+- [Running in GitHub Codespaces](#running-in-github-codespaces)
+- [Project Structure](#project-structure)
+- [Current Scope and Limitations](#current-scope-and-limitations)
+- [Future Roadmap](#future-roadmap)
+- [Potential Impact](#potential-impact)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## 3. Architecture
+## Overview
+
+During natural disasters such as landslides, flash floods, and severe weather events, emergency responders must make decisions with incomplete and rapidly changing information. Damaged roads, isolated communities, limited resources, and communication difficulties can make coordination even more challenging.
+
+**Marg Setu is a disaster-response coordination dashboard intended to bring essential operational information into one interface.**
+
+The platform combines an interactive map, incident information, response-resource visibility, and decision-support panels to help users understand the situation and plan their next actions.
+
+Rather than treating incident reporting, route awareness, and resource coordination as separate activities, Marg Setu aims to connect them within a unified web-based workspace.
+
+### Our vision
+
+To make disaster-response coordination more accessible, organized, and informed through a simple digital platform that can evolve to support field officers, emergency coordinators, and relief teams.
+
+## The Problem
+
+Disaster management involves several interconnected challenges:
+
+- **Limited situational awareness:** Responders may struggle to obtain a clear overview of incidents across affected areas.
+- **Route uncertainty:** Landslides, flooding, and damaged infrastructure can make previously usable roads unsafe or inaccessible.
+- **Fragmented information:** Incident reports, response vehicles, and supply information may be maintained separately.
+- **Resource allocation:** Emergency teams need to understand where resources may be required and which priorities need attention.
+- **Field-to-dashboard communication:** Information collected by field officers needs a structured way to reach decision-makers.
+- **Regional accessibility:** A useful disaster-response interface should be designed with local operating conditions and language accessibility in mind.
+
+These challenges highlight the need for a common operational view that can help teams organize information and coordinate their response.
+
+## Our Solution
+
+Marg Setu provides a centralized web dashboard that brings together map-based situational awareness, incident monitoring, response-resource information, and decision-support components.
+
+The current prototype is being developed around a React-based interface with Firebase integration and OpenStreetMap-based mapping.
+
+The intended workflow is straightforward:
+
+1. Authorized users access the dashboard.
+2. Users review the mapped situation and available incident information.
+3. Response teams examine available vehicle and resource information.
+4. Recommendation and supply-risk panels help organize operational priorities.
+5. Field-collected information can be incorporated as the reporting workflow develops.
+
+Marg Setu is a **decision-support and coordination prototype**. It is intended to assist human responders, not replace their judgment or independently guarantee safe routes.
+
+## Key Features
+
+### 1. Interactive Disaster Map
+
+Provides a geographic view for understanding incident locations and the surrounding operational area.
+
+- Map-based situational awareness using OpenStreetMap.
+- A dedicated map view integrated into the main dashboard.
+- Visual context for reviewing reported incidents and affected areas.
+- A foundation for future route-condition and accessibility overlays.
+
+### 2. Incident Monitoring
+
+Organizes incident-related information so users can review reported situations from the dashboard.
+
+- Dedicated incident panel.
+- Centralized presentation of incident information.
+- A foundation for prioritizing reports and monitoring changing conditions.
+
+The availability of live incident feeds and automated incident detection depends on future integrations.
+
+### 3. Response Vehicle Overview
+
+Provides a dedicated interface for reviewing vehicle or response-resource information.
+
+- Vehicle list and resource visibility.
+- A dashboard-level view of available operational information.
+- A foundation for future assignment and dispatch workflows.
+
+Live GPS tracking and automated dispatch should be considered future capabilities unless separately implemented.
+
+### 4. Recommendation Panel
+
+Provides a dedicated space for presenting operational recommendations.
+
+The goal is to help users organize decisions using available incident, route, and resource information. The quality of recommendations depends on the data and decision logic connected to the panel.
+
+### 5. Supply-Risk Awareness
+
+Includes a supply-risk dashboard component intended to support awareness of potential resource and supply concerns.
+
+This creates a foundation for future capabilities such as identifying shortages, monitoring essential supplies, and highlighting areas requiring relief support.
+
+### 6. Authentication and User Profiles
+
+Firebase integration supports the prototype's authentication and user-profile workflow.
+
+- Login interface.
+- Authenticated dashboard access.
+- User-profile and role-related interface elements.
+- Logout and return-to-login workflow.
+
+Role-based authorization must also be enforced by the backend and relevant data-access rules, not just by hiding interface elements.
+
+### 7. Field Reporting — Planned Expansion
+
+A planned enhancement is to allow field officers to submit photographs and on-site information.
+
+This could help connect ground-level observations with the central dashboard and improve the information available to coordinators.
+
+### 8. Multilingual Accessibility — Planned Expansion
+
+Future development aims to support English, Hindi, and a relevant regional language for Sikkim.
+
+The objective is to make the platform easier to use for people operating in different linguistic contexts.
+
+---
+
+## How It Works
+
+The following diagram illustrates the intended information flow. It describes the platform's design direction rather than claiming that every integration is already implemented.
 
 ```mermaid
-flowchart LR
-    U[Government Operator / Admin]
-    F[Field Officer]
-
-    UI[React + TypeScript + Vite]
-    MAP[Leaflet GIS]
-    API[FastAPI REST API]
-    AUTH[Demo Bearer Authentication]
-
-    RISK[Risk Engine]
-    INCIDENT[Incident Engine]
-    ROUTE[Smart Routing Engine]
-    SHIP[Shipment Impact Engine]
-    ALERT[Alert Engine]
-
-    STORE[In-memory prototype state]
-    LOCAL[Browser Local Storage Queue]
-
-    U --> UI
-    F --> UI
-
-    UI --> AUTH
-    AUTH --> API
-
-    UI --> MAP
-
-    API --> INCIDENT
-    API --> RISK
-    API --> ROUTE
-    API --> SHIP
-    API --> ALERT
-    API --> STORE
-
-    UI <--> LOCAL
-
-    INCIDENT --> RISK
-    RISK --> SHIP
-    SHIP --> ROUTE
-    RISK --> ALERT
-    ROUTE --> SHIP
-    ROUTE --> MAP
-    INCIDENT --> MAP
-    SHIP --> UI
-    ALERT --> UI
+flowchart TD
+    A[Field Officers and Coordinators] --> B[Marg Setu Web Interface]
+    B --> C[Authentication and User Profiles]
+    B --> D[Interactive Map]
+    B --> E[Incident Information]
+    B --> F[Vehicle and Resource Information]
+    B --> G[Recommendations and Supply-Risk Panels]
+    E --> H[Operational Awareness]
+    D --> H
+    F --> H
+    G --> I[Human Review and Decision-Making]
+    H --> I
+    J[Future Field Reports and Photos] -.-> E
 ```
 
-For the current prototype, route geometry is deterministic demonstration geometry. A production deployment can replace it with a real road-routing service such as OSRM/Valhalla/Mappls and persistent PostgreSQL/PostGIS storage.
+### Typical user journey
+
+**Access → Observe → Assess → Coordinate**
+
+- **Access:** Sign in to the application.
+- **Observe:** Review the map and available incident information.
+- **Assess:** Examine vehicle, resource, recommendation, and supply-risk panels.
+- **Coordinate:** Use the available information to support response planning.
+
+The dashboard is designed to bring these activities together in a single interface.
+
+## Technology Stack
+
+| Technology        | Purpose                                        |
+| ----------------- | ---------------------------------------------- |
+| React             | Building reusable user-interface components    |
+| Vite              | Frontend development server and build tooling  |
+| JavaScript / JSX  | Application logic and interface implementation |
+| Firebase          | Authentication and related backend integration |
+| OpenStreetMap     | Map data and geographic visualization          |
+| CSS               | Styling and responsive layout                  |
+| GitHub Codespaces | Cloud-based development environment            |
+
+The precise libraries and versions should be confirmed against the project's `package.json` and configuration files.
+
+## System Architecture
+
+Marg Setu follows a component-oriented frontend structure.
+
+### Frontend layer
+
+The React application contains the login experience, dashboard layout, map, incident information, vehicle information, and decision-support panels.
+
+### Authentication and backend layer
+
+Firebase is used for authentication and related integration. Data storage, access policies, and any additional backend services should be documented according to the actual configuration in the repository.
+
+### Mapping layer
+
+OpenStreetMap provides the underlying geographic map context. Additional route-condition data, incident overlays, and live traffic or road-status feeds would require suitable data sources and integration.
+
+### Decision-support layer
+
+Recommendation and supply-risk components provide a place to present operational information. Their actual capabilities depend on the rules, data inputs, and services implemented behind them.
 
 ---
 
-## 4. Technology Stack
+## Getting Started
 
-### Frontend
+Follow these steps to run the project locally.
 
-- React
-- TypeScript
-- Vite
-- Leaflet / React Leaflet
-- Lucide React
-- Recharts
-- CSS-based responsive UI
+### Prerequisites
 
-### Backend
+Install or have access to:
 
-- Python
-- FastAPI
-- Pydantic
-- Uvicorn
-- Bearer-token authentication for the prototype
+- Git
+- Node.js and npm
+- A GitHub account if using Codespaces
+- Firebase project configuration if required by the current application
 
-### Current prototype storage
+### 1. Clone the repository
 
-The current backend uses deterministic in-memory demo data for:
-
-- incidents
-- shipments
-- vehicles
-- approved reroutes
-- corridors
-
-The frontend also uses browser local storage for offline field-report queuing and compatibility caching.
-
----
-
-## 5. Demo Credentials
-
-### Admin
-
-```text
-Username: admin
-Password: admin123
-Role: Admin
+```bash
+git clone https://github.com/Alliedbeast/MargSetu.git
+cd MargSetu
 ```
 
-### Field Officer
+### 2. Install dependencies
 
-```text
-Username: field
-Password: field123
-Role: Field Officer
-```
-
-### District Officer
-
-```text
-Username: district
-Password: district123
-Role: District Officer
-```
-
-> These are prototype/demo credentials only. Do not use them in a production deployment.
-
----
-
-## 6. Prerequisites
-
-Install:
-
-- Python 3.10+
-- Node.js 18+
-- npm
-
-Verify:
-
-```powershell
-python --version
-node --version
-npm --version
-```
-
----
-
-## 7. Run the Backend
-
-Open PowerShell:
-
-```powershell
-cd D:\SIH26002-Marg-Setu\backend
-```
-
-Create/activate the virtual environment if needed:
-
-```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-```
-
-Install dependencies:
-
-```powershell
-pip install -r requirements.txt
-```
-
-Start FastAPI:
-
-```powershell
-python -m uvicorn app.main:app --reload --port 8000
-```
-
-Backend:
-
-```text
-http://127.0.0.1:8000
-```
-
-FastAPI documentation:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-Health check:
-
-```text
-http://127.0.0.1:8000/api/health
-```
-
----
-
-## 8. Run the Frontend
-
-Open another PowerShell:
-
-```powershell
-cd D:\SIH26002-Marg-Setu\frontend
-```
-
-Install dependencies:
-
-```powershell
+```bash
 npm install
 ```
 
-Development server:
+### 3. Configure Firebase
 
-```powershell
+If the application requires Firebase configuration:
+
+1. Open the Firebase configuration file in the project.
+2. Identify the configuration values and environment-variable names expected by the application.
+3. Supply the required values using the existing project configuration.
+4. If environment variables are used, create a local `.env` file using the names expected by the code.
+
+For example, if the application is configured to use Vite environment variables, the format may look like this:
+
+```dotenv
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+```
+
+These names are illustrative. **Use the actual variable names expected by this repository** and configure any additional required values.
+
+Do not commit private service-account credentials, passwords, or other secrets. Firebase client configuration is not a substitute for properly configured authentication and database security rules.
+
+### 4. Start the development server
+
+```bash
 npm run dev
 ```
 
-Vite normally serves the application at:
+Open the local URL printed in the terminal, typically `http://localhost:5173`.
 
-```text
-http://localhost:5173
-```
+### 5. Build for production
 
-Production build:
-
-```powershell
+```bash
 npm run build
 ```
 
----
+Vite normally writes the production build to the `dist/` directory.
 
-## 9. End-to-End Backend Smoke Test
+To preview the production build locally, run:
 
-From the project root:
-
-```powershell
-cd D:\SIH26002-Marg-Setu
-
-powershell -ExecutionPolicy Bypass -File ".\smoke-test.ps1"
+```bash
+npm run preview
 ```
 
-The smoke test verifies:
+For the exact available commands, check the `scripts` section of `package.json`.
+
+---
+
+## Running in GitHub Codespaces
+
+Marg Setu can be developed in GitHub Codespaces without installing the full development environment on your computer.
+
+1. Open the [Marg Setu repository](https://github.com/Alliedbeast/MargSetu).
+
+2. Select **Code → Codespaces** and create or open a Codespace.
+
+3. Open the terminal in the VS Code interface.
+
+4. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+5. Start the development server:
+
+   ```bash
+   npm run dev -- --host 0.0.0.0
+   ```
+
+6. Open the **Ports** tab and use the browser link for port `5173` when it appears.
+
+To check whether the application compiles successfully, run:
+
+```bash
+npm run build
+```
+
+If a command fails, inspect the terminal output and check that Node.js, dependencies, and required environment variables are configured correctly.
+
+---
+
+## Project Structure
+
+The following is a conceptual overview of the main components used in the prototype. Confirm the exact paths and filenames against the repository before relying on this as a complete file tree.
 
 ```text
-Authentication
-Dashboard
-Incidents
-Risk Engine
-Alerts
-Vehicles
-Shipments
-Route Recommendation
-Route Geometry
-Route Approval
-Shipment Propagation
+MargSetu/
+├── public/                  # Public static assets, if present
+├── src/
+│   ├── components/
+│   │   ├── MapView
+│   │   ├── IncidentPanel
+│   │   ├── VehicleList
+│   │   ├── StatsRow
+│   │   ├── MapLegend
+│   │   ├── RecommendationPanel
+│   │   └── SupplyRisk
+│   ├── Login.jsx
+│   ├── Dashboard.jsx
+│   └── ...                  # Other application files
+├── package.json
+├── vite.config.js
+└── README.md
 ```
 
-A successful run ends with:
+### Main component responsibilities
 
-```text
-=============================================
-          SMOKE TEST PASSED
-=============================================
+| Component             | Responsibility                          |
+| --------------------- | --------------------------------------- |
+| `Login.jsx`           | Login interface and authentication flow |
+| `Dashboard.jsx`       | Main operational dashboard              |
+| `MapView`             | Geographic visualization                |
+| `IncidentPanel`       | Incident information                    |
+| `VehicleList`         | Vehicle and response-resource overview  |
+| `StatsRow`            | Summary statistics                      |
+| `MapLegend`           | Map-symbol explanations                 |
+| `RecommendationPanel` | Operational recommendations             |
+| `SupplyRisk`          | Supply-risk information                 |
 
-Authentication       : PASS
-Dashboard            : PASS
-Incidents            : PASS
-Risk Engine          : PASS
-Alerts               : PASS
-Vehicles             : PASS
-Shipments            : PASS
-Route Recommendation : PASS
-Route Geometry       : PASS
-Route Approval       : PASS
-Shipment Propagation : PASS
-
-Marg Setu backend integration is operational.
-```
+Some filenames or directories may differ in the current repository.
 
 ---
 
-## 10. SIH Demonstration Flow
+## Current Scope and Limitations
 
-Use this sequence during the presentation:
+Marg Setu is an evolving prototype. Its current scope should be distinguished from its longer-term vision.
 
-```text
-1. Login
-      ↓
-2. Command Center
-      ↓
-3. Risk Intelligence
-      ↓
-4. Run SIH Demo Scenario
-      ↓
-5. Observe new risk + alerts
-      ↓
-6. Open Smart Rerouting
-      ↓
-7. Generate route alternatives
-      ↓
-8. Approve safer route
-      ↓
-9. Open Shipments
-      ↓
-10. Show Rerouted state
-      ↓
-11. Open GIS
-      ↓
-12. Show approved route geometry
-      ↓
-13. Open Reports
-      ↓
-14. Show operational evidence
-```
+| Area                   | Current direction        | Important limitation                                       |
+| ---------------------- | ------------------------ | ---------------------------------------------------------- |
+| Web dashboard          | React-based interface    | Requires further validation and refinement                 |
+| Authentication         | Firebase integration     | Access policies must be verified                           |
+| Mapping                | OpenStreetMap-based view | Map tiles alone do not establish current road safety       |
+| Incidents              | Dashboard incident panel | Live external feeds may require additional integration     |
+| Vehicles               | Vehicle-list component   | Live GPS and dispatch are not assumed                      |
+| Recommendations        | Dedicated panel          | Reliability depends on implemented logic and input data    |
+| Supply risks           | Dedicated panel          | Real inventory data and alert rules require integration    |
+| Field reporting        | Planned enhancement      | Photo and on-site reporting workflow needs implementation  |
+| Multilingual interface | Planned enhancement      | Regional-language support needs implementation and testing |
+
+**Important:** Marg Setu is intended to support emergency coordination, not replace official emergency instructions, verified road closures, or decisions by trained responders. It should not be relied upon as a source of confirmed safe routes without validated and sufficiently current data.
 
 ---
 
-## 11. SIH Problem Statement Mapping
+## Future Roadmap
 
-| SIH Need | Marg Setu Implementation |
-|---|---|
-| Road/bridge accessibility monitoring | GIS map + corridor risk + field incident reporting |
-| Disruption prediction | Risk Intelligence + weighted risk engine |
-| Alternate routing | Smart Rerouting with multiple route alternatives |
-| GPS / field information | Field report GPS capture |
-| Incident reporting | Authenticated `/api/incidents` workflow |
-| Logistics impact | Shipment impact engine |
-| Vehicle monitoring | `/api/vehicles` + GIS vehicle markers |
-| Alerts | `/api/alerts` + live UI |
-| Offline operation | Browser queue + automatic retry on connectivity return |
-| Decision support | Command Center + Risk + Rerouting + Reports |
-| Cargo priority | Critical/High/Medium/Low shipment priority |
-| GIS visualization | Leaflet map with incident/vehicle/route layers |
-| Operational analytics | Reports & Analytics |
-| Secure access | Authenticated API + role-aware UI |
+The following improvements represent potential next steps for the project.
 
-The SIH problem emphasizes that the useful unit of decision-making is not only a road closure but its effect on vehicles, deliveries and logistics operations. Marg Setu is structured around that chain. fileciteturn31file5
+- [ ] **Field reporting:** Allow field officers to submit incident details, photographs, and location information.
+- [ ] **Live incident feeds:** Integrate verified sources for relevant disaster alerts and incident updates.
+- [ ] **Route-condition awareness:** Display verified closures, hazards, and road-accessibility information.
+- [ ] **Resource coordination:** Expand vehicle and relief-resource management workflows.
+- [ ] **Supply monitoring:** Track essential supplies and flag potential shortages using reliable data.
+- [ ] **Multilingual support:** Improve accessibility through English, Hindi, and a suitable regional language.
+- [ ] **Mobile responsiveness:** Optimize the interface for field officers using phones and tablets.
+- [ ] **Connectivity resilience:** Explore ways to preserve essential information during intermittent connectivity.
+- [ ] **Security improvements:** Validate role-based access, data protection, and secure reporting workflows.
+- [ ] **Testing and deployment:** Add automated tests, monitoring, and a reliable deployment pipeline.
 
----
+These are planned improvements, not claims that the features are already available.
 
-## 12. Innovation Positioning
+## Potential Impact
 
-Marg Setu should not be presented as only:
+Marg Setu aims to contribute to more organized disaster-response workflows by:
 
-- a map
-- a fleet tracker
-- a weather application
-- a route calculator
+- Improving visibility into incidents and affected areas.
+- Bringing operational information into one dashboard.
+- Supporting better-informed route and resource assessments.
+- Providing a foundation for field-to-control-room communication.
+- Making disaster-response tools more accessible to teams working in challenging regional conditions.
 
-The stronger positioning is:
+The platform's actual impact will depend on the reliability of its data sources, usability in field conditions, and validation with emergency-response stakeholders.
 
-> **A disaster-aware logistics decision-support platform that propagates infrastructure risk into shipment impact and safer routing decisions.**
+## Contributing
 
-The project analysis identifies risk-aware routing, cargo-priority routing, impact propagation, offline field intelligence and trust-aware reporting as relevant innovation opportunities. fileciteturn31file2
+Contributions that improve usability, reliability, accessibility, security, and disaster-response workflows are welcome.
 
----
+To contribute:
 
-## 13. Security
+1. Fork the repository.
+2. Create a feature branch.
+3. Make your changes and test them.
+4. Commit your work with a clear message.
+5. Open a pull request explaining the change and its purpose.
 
-The current prototype demonstrates:
+For significant changes, consider discussing the proposed approach with the project maintainers first.
 
-- authenticated API requests
-- Bearer-token session handling
-- protected dashboard/incident/route endpoints
-- role-aware frontend users
-- device identifiers in field incidents
-- timestamps and GPS metadata
+## License
 
-For production, add:
-
-- real JWT/OAuth or government SSO
-- RBAC enforcement in the backend
-- HTTPS
-- rate limiting
-- audit logs
-- signed field submissions
-- GPS spoofing/anomaly detection
-- encrypted persistent storage
-- secret management
+A license has not been specified here because the repository's current license status has not been verified. Please check the repository for a `LICENSE` file and add the appropriate license information before distributing the project.
 
 ---
 
-## 14. Offline-First Field Intelligence
+## Final Note
 
-Current browser workflow:
+**Marg Setu is being developed as a practical step toward better disaster-response coordination.** By combining geographic awareness, incident information, resource visibility, and decision-support tools, the project aims to provide a foundation that can grow into a more capable and accessible emergency-management platform.
 
-```text
-No Internet
-    ↓
-Officer submits incident
-    ↓
-Incident saved locally
-    ↓
-GPS + timestamp + device metadata retained
-    ↓
-Network returns
-    ↓
-Queued incident sent to FastAPI
-    ↓
-Live dashboard/map state refreshes
-```
-
-For production, replace browser local storage with IndexedDB/background sync and a durable backend synchronization queue.
-
----
-
-## 15. Screenshots
-
-Recommended screenshot set:
-
-| File | Screen | What it proves |
-|---|---|---|
-| `01-login.png` | Login | Secure entry |
-| `02-dashboard.png` | Command Center | Operational overview |
-| `03-risk.png` | Risk Intelligence | Risk scoring |
-| `04-alerts.png` | Alerts | Disruption intelligence |
-| `05-routing.png` | Smart Rerouting | Route alternatives |
-| `06-approval.png` | Route Approval | Human decision |
-| `07-shipment-rerouted.png` | Shipments | Impact propagation |
-| `08-gis-approved-route.png` | GIS | Approved route geometry |
-| `09-reports.png` | Reports | Analytics/evidence |
-| `10-field-incident.png` | Field Incidents | Offline/GPS reporting |
-
-See:
-
-```text
-docs/screenshots/SCREENSHOT_CHECKLIST.md
-```
-
-for the capture sequence.
-
----
-
-## 16. Project Structure
-
-```text
-SIH26002-Marg-Setu/
-│
-├── backend/
-│   ├── app/
-│   │   └── main.py
-│   ├── requirements.txt
-│   └── ...
-│
-├── frontend/
-│   ├── src/
-│   │   ├── api.ts
-│   │   ├── App.tsx
-│   │   ├── styles.css
-│   │   ├── components/
-│   │   ├── data/
-│   │   ├── pages/
-│   │   └── types/
-│   ├── package.json
-│   └── ...
-│
-├── smoke-test.ps1
-├── README.md
-├── ARCHITECTURE.md
-└── docs/
-    └── screenshots/
-```
-
----
-
-## 17. Current Demo Limitations
-
-This SIH prototype intentionally uses simplified demo infrastructure in a few areas:
-
-1. Backend persistence is currently in-memory.
-2. Route geometry is deterministic demonstration geometry rather than live turn-by-turn geometry.
-3. The selected photo is currently represented through its filename in the incident API rather than object-storage image delivery.
-4. Live synchronization currently uses authenticated polling/event refresh rather than a production WebSocket implementation.
-5. Risk scoring is a prototype weighted decision model, not a validated production ML model.
-
-These are appropriate areas for the next production phase.
-
----
-
-## 18. Future Scope
-
-### Real-time data
-
-- IMD/weather integration
-- rainfall forecasts
-- flood/water-level feeds
-- road/bridge condition feeds
-- government disaster information
-
-### Geospatial intelligence
-
-- PostgreSQL + PostGIS
-- real road network data
-- real-time geofencing
-- terrain/slope layers
-- bridge and road asset layers
-
-### Routing
-
-- OSRM / Valhalla / Mappls integration
-- live alternate routes
-- traffic-aware ETA
-- cargo-specific optimization
-- emergency-corridor prioritization
-
-### AI / ML
-
-- trained disruption prediction model
-- rainfall + terrain + historical-event features
-- probability calibration
-- model monitoring
-- actual-vs-predicted learning loop
-
-### Security
-
-- government SSO
-- stronger RBAC
-- audit trails
-- signed field reports
-- GPS spoof detection
-
-### Field operations
-
-- IndexedDB background sync
-- image/object storage
-- multilingual interface
-- mobile application
-- push notifications
-
-### Platform integration
-
-- ERP / supply-chain platforms
-- emergency-services systems
-- district/state control rooms
-- third-party logistics providers
-
----
-
-## 19. Closing
-
-Marg Setu is designed around one operational question:
-
-> **When infrastructure risk changes, what should logistics operators do next?**
-
-The prototype connects:
-
-```text
-Infrastructure Risk
-        ↓
-Field Intelligence
-        ↓
-Risk Assessment
-        ↓
-Shipment Impact
-        ↓
-Safer Route Alternatives
-        ↓
-Human Approval
-        ↓
-Operational Tracking
-```
-
-**Marg Setu — Predict. Protect. Deliver.**
-=======
-# MargSetu
-Al-Based Smart Logistics and Accessibility Intelligence Platform for North Eastern Region (NER)
->>>>>>> 4a3f586ac85344cb29073ebba9ce4aa3cdb50c3c
+Built with the goal of helping responders make better-informed decisions when reliable information matters most.
