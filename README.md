@@ -15,6 +15,7 @@ Marg Setu aims to help disaster-response teams understand developing situations,
 - [Our Solution](#our-solution)
 - [Key Features](#key-features)
 - [How It Works](#how-it-works)
+- [Glimpse of our Website](#Website)
 - [Technology Stack](#technology-stack)
 - [System Architecture](#system-architecture)
 - [Getting Started](#getting-started)
@@ -169,6 +170,14 @@ flowchart TD
 - **Coordinate:** Use the available information to support response planning.
 
 The dashboard is designed to bring these activities together in a single interface.
+
+## Website
+<img width="1920" height="874" alt="Screenshot 3" src="https://github.com/user-attachments/assets/7047de1a-6a3b-4528-a642-9226b9f08a6e" />
+
+<img width="1920" height="1080" alt="Screenshot 2" src="https://github.com/user-attachments/assets/c47d7199-50f8-43a3-9da0-1822b1522fbf" />
+
+<img width="1920" height="1080" alt="Screeshot 1" src="https://github.com/user-attachments/assets/fae94271-e9a9-4f86-8412-7d0915bc7d97" />
+
 
 ## Technology Stack
 
